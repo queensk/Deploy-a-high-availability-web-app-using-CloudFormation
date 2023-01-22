@@ -6,13 +6,17 @@ Parameters:
     Description: Environment name that will be prefixed to resource names
     Type: String
 
+  NetworkEnvironmentName:
+    Description: Network Environment name that will be prefixed to resource names
+    Type: String
+
 Resources:
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow http to our load balancer
       VpcId:
-        Fn::ImportValue: !Sub "${EnvironmentName}-VPCID"
+        Fn::ImportValue: !Sub "${NetworkEnvironmentName}-VPCID"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -29,7 +33,7 @@ Resources:
     Properties:
       GroupDescription: Allow http to our hosts and SSH from local only
       VpcId:
-        Fn::ImportValue: !Sub "${EnvironmentName}-VPCID"
+        Fn::ImportValue: !Sub "${NetworkEnvironmentName}-VPCID"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -94,7 +98,7 @@ Resources:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
       VPCZoneIdentifier:
-        - Fn::ImportValue: !Sub "${EnvironmentName}-PRIV-NETS"
+        - Fn::ImportValue: !Sub "${NetworkEnvironmentName}-PRIV-NETS"
       LaunchConfigurationName:
         Ref: WebAppLaunchConfig
       MinSize: "3"
@@ -106,8 +110,8 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Subnets:
-        - Fn::ImportValue: !Sub "${EnvironmentName}-PUB1-SN"
-        - Fn::ImportValue: !Sub "${EnvironmentName}-PUB2-SN"
+        - Fn::ImportValue: !Sub "${NetworkEnvironmentName}-PUB1-SN"
+        - Fn::ImportValue: !Sub "${NetworkEnvironmentName}-PUB2-SN"
       SecurityGroups:
         - Ref: LBSecGroup
 
@@ -148,7 +152,7 @@ Resources:
       UnhealthyThresholdCount: 5
       VpcId:
         Fn::ImportValue:
-          Fn::Sub: "${EnvironmentName}-VPCID"
+          Fn::Sub: "${NetworkEnvironmentName}-VPCID"
 
 Outputs:
   LoadBalancerUrl:
