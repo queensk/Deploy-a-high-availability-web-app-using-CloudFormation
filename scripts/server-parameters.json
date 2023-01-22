@@ -1,10 +1,6 @@
 [
   {
-    "ParameterKey": "NetworkEnvironmentName",
-    "ParameterValue": "NetworkUdagram"
-  },
-  {
     "ParameterKey": "EnvironmentName",
-    "ParameterValue": "SeversUdagram"
+    "ParameterValue": "Udagram-v1"
   }
 ]
