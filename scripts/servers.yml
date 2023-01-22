@@ -66,10 +66,10 @@ Resources:
       Path: "/"
 
   S3AccessRoleProfile:
-  Type: AWS::IAM::InstanceProfile
-  Properties:
-    Roles:
-      - !Ref S3AccessRole
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref S3AccessRole
 
   WebAppLaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
