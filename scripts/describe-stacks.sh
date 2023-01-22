@@ -1,1 +1,1 @@
-aws cloudformation list-stacks
+aws cloudformation describe-stack --stack-name
