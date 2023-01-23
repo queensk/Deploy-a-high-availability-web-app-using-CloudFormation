@@ -6,6 +6,16 @@ Parameters:
     Description: Environment name that will be prefixed to resource names
     Type: String
 
+  keyName:
+    Description: Ec2 Key name for deploying the recodes to the specific region.
+    Type: String
+    Default: udiagramservers
+
+  Ec2ImageId:
+    Description: Ec2 image id.
+    Type: String
+    Default: ami-071c33e7823c066b5
+
 Resources:
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
@@ -78,9 +88,9 @@ Resources:
           sudo systemctl start apache2.service
           cd /var/www/html
           echo "it works! Build by cloudformation script on $(hostname)" > index.html
-      ImageId: ami-071c33e7823c066b5
+      ImageId: !Ref Ec2ImageId
       IamInstanceProfile: !Ref S3AccessRoleProfile
-      KeyName: udiagramservers
+      KeyName: !Ref keyName
       SecurityGroups:
         - Ref: WebServerSecGroup
       InstanceType: t3.medium

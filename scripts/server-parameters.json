@@ -2,5 +2,13 @@
   {
     "ParameterKey": "EnvironmentName",
     "ParameterValue": "Udagram-v1"
+  },
+  {
+    "ParameterKey": "keyName",
+    "ParameterValue": "udiagramservers"
+  },
+  {
+    "ParameterKey": "Ec2ImageId",
+    "ParameterValue": "ami-071c33e7823c066b5"
   }
 ]
